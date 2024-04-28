@@ -1,6 +1,0 @@
-# EXPLICACION
-https://blog.desdelinux.net/permisos-y-derechos-en-linux/?msclkid=22f8cb88ba8111ecb5d8a3db91f066ab
-
-
-# COMO SON Y COMO SE CAMBIAN 
-https://www.softzone.es/programas/linux/permisos-archivos-directorios-linux/
