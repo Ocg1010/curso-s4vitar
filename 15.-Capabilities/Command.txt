@@ -1,0 +1,12 @@
+UNA CAPABILITIE ES UNA CAPACIDAD QUE LE CONFIGURAS A DETERMINADOS BINARIOS PARA PODER EJECUTAR CIERTAS TAREAS
+
+# MOSTRAR LAS CAPABILITIES DEL SISTEMA
+getcap -r / 2>/dev/null
+
+# ASIGNAR UNA CAPABILITIE 
+setcap cap_setuid+ep /usr/bin/python3.9
+getcap /usr/bin/python3.9
+
+# QUITAR CAPABILITIE 
+setcap -r /usr/bin/python3.9
+getcap /usr/bin/python3.9
