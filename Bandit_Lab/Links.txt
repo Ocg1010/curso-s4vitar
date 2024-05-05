@@ -1,0 +1,10 @@
+AWK Cheat Sheet: https://www.shortcutfoo.com/app/dojos/awk/cheatsheet
+
+AWK Cheat Sheet 2: https://bl831.als.lbl.gov/~gmeigs/scripting_help/awk_cheat_sheet.pdf
+
+CUT
+https://www.golinuxcloud.com/cut-command-in-linux/
+
+Tutorial del uso de SORT: https://www.ibidemgroup.com/edu/tutorial-sort-linux-unix/
+
+Tutorial del uso de UNIQ: https://victorhckinthefreeworld.com/2021/10/21/el-comando-uniq-de-gnu/
