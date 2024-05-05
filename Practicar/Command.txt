@@ -1,0 +1,42 @@
+# EL COMANDO awk 'NR==2' HACE QUE ME QUEDE CON LA SEGUNDA LINEA, PARECIDO A UN tail -n 2
+
+# AQUI ESTAMOS RECORTANDO CON awk EL SEGUNDO ARGUMENTO DE UNA LINEA, CON ESTO ME QUEDARIA MI IP Y SU MASCARA DE RED
+ip a | grep enp1s0 | awk 'NR==2' | awk '{print $2'}
+
+# SI ME QUISIERA QUEDAR SOLO CON LA IP, USO awk Y LE DIGO QUE COMO DELIMITADOR TOME LA BARRA '/'
+ip a | grep enp1s0 | tail -n 1 | awk '{print $2}' | awk '{print $1}' FS='/'
+
+# CON cut TAMBIEN LE PUEDES DECIR QUE TOME COMO DELIMITADOR LA BARRA '/' Y QUEDARME CON EL FILD 1 OSEA EL PRIMER CAMPO 
+ip a | grep enp1s0 | tail -n 1 | awk '{print $2}' | cut -d '/' -f 1
+
+# CON tr DECIRLE QUE QUIERES CONVERTIR LA '/' EN ' ' (ESPACIO) Y QUE TE IMPRIMA EL PRIMER ARGUMENTO
+ip a | grep enp1s0 | tail -n 1 | awk '{print $2}' | tr '/' ' ' | awk '{print $1}'
+
+# EJECUTAR UN SCRIPT SIN PERMISOS DE EJECUCION 
+bash script.sh
+
+# BUSCAR POR UNA PLABRA
+grep -r '\w' 2>/dev/null
+
+# REFERIRME AL ULTIMO ARGUMENTO DE UNA LINEA 
+awk 'NF{print $NF}'
+
+# BUSCAR ARCHIVOS APARTIR DE LA UBICACION DONDE ESTAS Y QUITAR LAS LINEAS QUE TENGAN bashrc, profile Y logout. DESPUES VER SU CONTENIDO
+find . -type -f | grep -vE 'bashrc|profile|logout' xargs cat 
+
+# BUSCAR UN ARHIVO EN EL DIRECTORIO ACTUAL, FILTRAR POR LOS QUE TENGAN LA PALARBRA "-file" Y VER QUE TIPO DE ARCHIVO SON
+find . -type f | grep "\-file" | xargs file
+
+# QUIERO BUSCAR DESDE AQUI ARCHIVOS CON CAPACIDAD DE LECTURA Y QUE NO SEAN EJECUTABLES, Y CON TAMAÑO DE 1033 BYTES
+find . -type f -readable ! -executable -size 1033c
+
+# SUSTITUCIONES (NO ES LO MISMO sed Y tr ) QUIERO SUSTITUIR PALABRAS 
+echo "Hola esto es una prueba y como buena prueba estamos probando" | sed 's/prueba/probando/g'
+
+# sort ESTO ORDENA ALFABETICAMENTE EL CONTENIDO DEL ARCHIVO, uniq PARA LISTAR LINEAS UNICAS
+sort data.txt | uniq -u
+
+# LISTAR LAS CADENAS DE CARACTERES IMPRIMIBLES DE UN ARCHIVO QUE NO ES LEGIBLE 
+strings data.txt
+
+#

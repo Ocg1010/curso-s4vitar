@@ -1,0 +1,30 @@
+# BUSCAR UN ARCHIVO QUE SE LLAME PASSWD
+find / -name passwd 2>/dev/null
+
+# APLICAR DE FORMA PARALELA UN COMANDO SOBRE TODA LA SALIDA DEL COMANDO ANTERIOR
+find / -name passwd 2>/dev/null | xargs ls -l
+
+# BUSCAR ARCHIVOS SUID
+find / -perm -4000 2>/dev/null
+
+# BUSCAR DIRECTORIOS CUYO GRUPO SEA WHIL
+find / -group ocantoran -type d 2>/dev/null
+
+# BUSCAR ARCHIVOS CUYO USUARIO SEA ROOT Y QUE TENGA CAPACIDAD DE ESCRITURA
+find / -user root -writable 2>/dev/null
+
+# BUSCAR ARCHIVOS CUYO USUARIO SEA ROOT Y QUE SEAN EJECUTABLES
+find / -user root -executable -type f 2>/dev/null
+
+# SI SOLO SUPIERA QUE UN ARCHIVO EMPIEZA CON DEX (dexdump.sh)
+find / -name dex\* 2>/dev/null
+
+# TAMBIEN DECIR QUE EMPEZABA CON ALGO QUE NO RECUERDAS, LUEGO TENIA exdum Y CONTINUABA CON ALGO QUE NO RECUERDAS
+find / -name \*exdum\* 2>/dev/null
+
+# RECORDAR QUE EMPEZABA CON dex CONTINUABA CON ALGO Y TERMINABA EN .sh 
+find / -name dex\*.sh 2>/dev/null
+
+# AGREGARLE UN ls PARA QUE TE LISTE LAS PROPIEDADES DE PERMISOS 
+find / -name dex\* -ls 2>/dev/null
+
