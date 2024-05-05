@@ -1,0 +1,56 @@
+https://overthewire.org/wargames/bandit/
+
+# BANDIT 1
+ssh bandit1@bandit.labs.overthewire.org -p 2220
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+# QUIERO QUE BUSQUE UNA PALABRA QUE ME MUESTRE LA ULTIMA LINEA, QUE LA RECORTE AL SEGUNDO ARGUMENTO TOMANDO COMO DELIMITANTE LOS ":"
+grep -r '\w' 2>/dev/null | tail -n 1 | awk '{print $2}' FS=":"
+grep -r '\w' 2>/dev/null | tail -n 1 | cut -d ":" -f 2
+
+grep -r '\w' 2>/dev/null | tail -n 1 | tr ':' ' ' | awk '{print $2}'
+
+grep -r '\w' 2>/dev/null | tail -n 1 | tr ':' ' ' | awk 'NF{print $NF}'
+
+grep -r '\w' 2>/dev/null | tail -n 1 | tr ':' ' ' | rev | awk '{print $1}' | rev 
+
+echo -e "\n[+] La contraseña de bandit2 es $(grep -r '\w' 2>/dev/null | tail -n 1 | tr ':' ' ' | rev | awk '{print $1}' | rev )\n:
+
+cat <-
+
+
+BANDIT 10
+# CODIFICACION Y DECODIFICACION EN BASE 64
+echo "Hola esto es una prueba" | base64
+cat /etc/hosts | base64 
+# CUANDO QUIERES QUE LA CODIFICACION ESTE EN UNA SOLA LINEA 
+cat /etc/hosts | base64 -w 0
+# DECODIFICAR UNA CADENA
+echo "3r32r435gsdfgsdfqweq" | base64 -d
+
+
+# BANDIT 12
+
+# ROTACION DE 13 CARACTERES SIN root13.com, SUSTITUCION DE UNOS CARACTERES POR OTROS CARACTERES PARA EL EJEMPLO DEL TEXTO QUE ROTARON 13 VECES
+cat data.txt | tr '[G-ZA-Fg-za-f]' '[T-ZA-St-za-s]' 
+# SEGUNDO 
+cat data.txt | tr '[A-Za-Z]' '[N-ZA-Mn-za-m]'
+
+# BANDIT 13 
+# CIFRADO HEXADECIMAL 
+cat /etc/hosts | xxd
+# CIFRADO HEXADECIMAL MOSTRANDO SOLO LO HEXADECIMAL Y OMITINEDO LO IRRELEVANTE
+cat /etc/hosts | xxd -ps 
+# HACER EL PROCESO INVERSO, VER QUE DATOS PUSISTE EN HEXADECIMAL
+echo "34324213214359abc98879cabf987acb98c978f" | xdd -ps -r
+# PARA REALIZAR ACCIONES EN UN ARCHIVO APLICARLE FILTROS Y LUEGO EL RESULTADO VOLVER A METERLO AL MISMO ARCHIVO REQUERIMOS EL COMANDO ESPECIAL sponge
+#ME ESTOY QUEDANDO CON EL TERCER ARGUMENTO EL OUTPUT LO METO AL ARCHIVO SOBREESCRIVIENDO LO QUE HABIA EN ESE ARCHIVO.
+cat test | awk '{print $3}' | sponge test
+# DESCOMPRIMIR UN ARCHIVO .gz
+gunzip data.gz
+7z data.gz
+# VER LO QUE TIENE DENTRO EL ARCHIVO CON 7z
+7z l data.gz
+# DESCOMPRIMIR SIN IMPORTAR CUAL SEA EL TIPO DE COMPRIMIDO
+7z x data.gz
+# PRACTICA REALIZADA EN EL ARCHIVO script_bandit13.sh
