@@ -36,7 +36,7 @@ cat data.txt | tr '[G-ZA-Fg-za-f]' '[T-ZA-St-za-s]'
 # SEGUNDO 
 cat data.txt | tr '[A-Za-Z]' '[N-ZA-Mn-za-m]'
 
-# BANDIT 13 
+# BANDIT 12 
 # CIFRADO HEXADECIMAL 
 cat /etc/hosts | xxd
 # CIFRADO HEXADECIMAL MOSTRANDO SOLO LO HEXADECIMAL Y OMITINEDO LO IRRELEVANTE
@@ -54,3 +54,69 @@ gunzip data.gz
 # DESCOMPRIMIR SIN IMPORTAR CUAL SEA EL TIPO DE COMPRIMIDO
 7z x data.gz
 # PRACTICA REALIZADA EN EL ARCHIVO script_bandit13.sh
+
+
+# BANDIT 15 (Uso de netcat para realizar conexiones)
+# VER LOS PUERTOS QUE TIENES ABIERTOS
+ss -nltp
+# VER LOS PUERTOS ABIERTOS CON LA RUTA /proc/net/tcp
+cat /proc/net/tcp 
+
+# CON UN WHILE VAMOS A ITERAR A TODAS ESTAS LINEAS PARA DECIFRARLAS
+echo "0035
+E115
+0277
+0035
+14EB
+9A27
+0016
+0035
+A74E
+D004
+889C
+BBFA
+A362
+ED2A" | while read line; do echo "Estamos la linea con el valor $line"; done
+
+# SEGUNDA MANERA
+for line in $(echo "0035
+E115
+0277
+0035
+14EB
+9A27
+0016
+0035
+A74E
+D004
+889C
+BBFA
+A362
+ED2A"); do  echo -e "[+] Mostrando el contenido de la linea ${line}"
+done
+
+# BASH HEXADECIMAL TO DECIMAL IBASE OBASE, ESTO CONVIERTE A BASE 10 Y CON SORT TE ORDENA
+echo "0035
+E115
+0277
+0035
+14EB
+9A27
+0016
+0035
+A74E
+D004
+889C
+BBFA
+A362
+ED2A" | while read line; do echo "[+] Puerto ${line} -> $(echo "obase=10; ibase=16; $line" | bc) - OPEN"; done | sort -u
+
+# VER QUE SERVICIO ESTA CORRIENDO EN BASE A UN PUERTO
+lsof -i:22
+lsof -i:6600
+
+# LISTAR TODOS LOS PROCESO DEL SISTEMA
+ps -faux
+
+# LISTAR LOS COMANDOS ESPECIFICOS QUE SE ESTAN LISTANDO EN EL SISTEMA
+ps -eo command
