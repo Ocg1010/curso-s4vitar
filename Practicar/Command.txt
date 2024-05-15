@@ -39,4 +39,6 @@ sort data.txt | uniq -u
 # LISTAR LAS CADENAS DE CARACTERES IMPRIMIBLES DE UN ARCHIVO QUE NO ES LEGIBLE 
 strings data.txt
 
-#
+# md5sum SIRVE PARA SABER SI NO HAN MANIPULADO LA DATA O NO SE HA ENVIADO CORRECTAMENTE
+echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+echo I am user bandit23 | md5sum | awk '{print $1}'
