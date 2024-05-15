@@ -8,3 +8,6 @@ https://www.golinuxcloud.com/cut-command-in-linux/
 Tutorial del uso de SORT: https://www.ibidemgroup.com/edu/tutorial-sort-linux-unix/
 
 Tutorial del uso de UNIQ: https://victorhckinthefreeworld.com/2021/10/21/el-comando-uniq-de-gnu/
+
+
+Usando Netcat – Algunos comandos prácticos: https://blog.desdelinux.net/usando-netcat-algunos-comandos-practicos/

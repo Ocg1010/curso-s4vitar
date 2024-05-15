@@ -17,7 +17,7 @@ Algunos de los archivos básicos que podemos encontrar en este directorio son:
 cdrom que representa nuestro dispositivo de CDROM.
 sda que representa nuestro disco duro sata.
 audio que representa nuestra tarjeta de sonido.
-psaux que representa el puerto PS/2.
+psaux que representa el puerto PS/2
 lpx que representa nuestra impresora.
 fd0 que representa nuestra disquetera.
 Directorio /etc

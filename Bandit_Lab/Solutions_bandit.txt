@@ -133,10 +133,14 @@ ncat --ssl localhost 30001
 
 # EL COMANDO ss -nltp SE UTILIZA PARA MOSTRAR TODAS LAS CONEXIONES DE RED EN EL SISTEMA QUE ESTAN ESCUCHANDO (l)EN MODO TCP (-t) Y UDP (-u),JUNTO CON LOS PROCESOS ASOCIADOS A ESAS CONEXIONES (-p) 
 # -n: Esta opción indica a ss que muestre direcciones IP y números de puerto en formato numérico en lugar de resolverlos a nombres de host y servicios. En otras palabras, cuando utilizas -n, verás direcciones IP y números de puerto en su forma numérica, lo que puede ser útil en situaciones donde no necesitas la resolución de nombres de host o servicios y prefieres ver los datos de manera más directa.
-# -l: La opción -l significa "listen" (escuchar). Al usar -l, ss solo mostrará conexiones que estén en estado de escucha, es decir, que estén esperando conexiones entrantes. Esto es útil cuando quieres ver qué servicios están activos y esperando conexiones en tu sistema en lugar de mostrar todas las conexiones, incluidas las que están establecidas o en otros estados.conexiones entrantes).
+# -l: La opción -l significa "listen" (escuchar). Al usar -l, ss solo mostrará conexiones que estén en estado de escucha, es decir, que estén esperando conexiones entrantes. Esto es útil cuando quieres ver qué servicios están activos y esperando conexiones en tu sistema en lugar de mostrar todas las conexiones, incluidas las que están establecidas o en otros estados.conexiones entrantes.
 # -t: Muestra solo conexiones TCP.
 # -u: Muestra solo conexiones UDP.
 # -p: Muestra el nombre del programa y el número de PID asociados a cada conexión.
 ss -nltp
 
 nmap --open -T5 -v -n -p31000-32000 127.0.0.1
+
+# BANDIT 20
+# PONERTE EN ESCUCHA EN UN PUERTO CON LA HERRAMIENTA NETCAT
+nc -nlvp 4646
