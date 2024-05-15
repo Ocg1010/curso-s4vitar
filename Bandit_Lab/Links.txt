@@ -11,3 +11,6 @@ Tutorial del uso de UNIQ: https://victorhckinthefreeworld.com/2021/10/21/el-coma
 
 
 Usando Netcat – Algunos comandos prácticos: https://blog.desdelinux.net/usando-netcat-algunos-comandos-practicos/
+
+CRON Y CRONTAB
+https://blog.desdelinux.net/cron-crontab-explicados/

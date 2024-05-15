@@ -144,3 +144,54 @@ nmap --open -T5 -v -n -p31000-32000 127.0.0.1
 # BANDIT 20
 # PONERTE EN ESCUCHA EN UN PUERTO CON LA HERRAMIENTA NETCAT
 nc -nlvp 4646
+
+
+# BANDIT 23
+#!/bin/bash
+
+myname=$(whoami)
+
+cd /var/spool/${whoami}
+echo "Executing and deleting all scripts in /var/spool/${myname}:"
+
+for i in * .*;
+do
+  if [ "${i}" != "." -a "${i}" != ".." ]'
+  then
+    echo "Handling ${i}"
+    owner="$(stat --format "%U" ./${i})"
+    if [ "${owner}" = "bandit23" ]; then
+      timeout -s 9 60 ./${i}
+      fi
+      rm -f ./${i}
+    fi
+  done
+
+
+
+# CADA SEGUNDO MONITORIZA LO QUE PASA EN EL DIRECTORIO EN EL QUE ESTAS
+watch -n 1 ls -l
+
+# BANDIT 26
+for ping in {000 9999}; do echo "efrdfg$%#$^FEwfewfwef ${pin}"; 
+done > combinatios.txt
+
+cat combinatios.txt | nc localhost 30002 | grep -vE 'Wrong|Please enter'
+
+
+# BANTIT 26
+# CON MORE PUEDES ASIGNAR UNA VARIABLE EN EL MODO VISUAL: set=/bin/bash Y DEPUES EJECUTARLA 
+
+
+# BANDIT 34 
+En Bash se pueden usar argumentos desde la línea de comandos, los cuales son enviados a los scripts como variables. Estos quedarían representados de la siguiente forma:
+
+[$0]: Representa el nombre del script que se invocó desde la terminal.
+
+[$1]: Es el primer argumento desde la línea de comandos.
+
+[$2]: Es el segundo argumento desde la línea de comandos y así sucesivamente.
+
+[$#]: Contiene el número de argumentos que son recibidos desde la línea de comandos.
+
+[$*]: Contiene todos los argumentos que son recibidos desde la línea de comandos, guardados todos en la misma variable.
