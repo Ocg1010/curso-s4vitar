@@ -42,3 +42,7 @@ strings data.txt
 # md5sum SIRVE PARA SABER SI NO HAN MANIPULADO LA DATA O NO SE HA ENVIADO CORRECTAMENTE
 echo I am user bandit23 | md5sum | cut -d ' ' -f 1
 echo I am user bandit23 | md5sum | awk '{print $1}'
+
+
+# RECORTA DEL RANGO "name: "Forge"" HASTA "resuelta:", OCUALTA CON grep ALGUNOS PARAMETROS, CON tr QUITA LAS "," Y LAS '"' Y CON sed ELIMINA LOS ESPACIOS INICIALES QUE TENIA
+cat bundle.js  | awk "/name: \"Forge\"/,/resuelta:/" | grep -vE "id:|sku:|resuelta:" | tr -d ',' | tr -d '"' | sed 's/^ *//'
