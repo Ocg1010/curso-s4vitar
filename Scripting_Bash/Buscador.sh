@@ -19,7 +19,7 @@ mainUrl="https://htbmachines.github.io/bundle.js"
 function ctrl_c () {
   echo -e "$\n\n${redColour}[+]Saliendo...\n${endColour}"
   tput cnorm && exit 1
-}
+} 
 function helpPanel () {
   echo -e "\n${yellowColour}[+]${endColour}${grayColour} Uso:${endColour}"
   echo -e "\t${purpleColour}u)${endColour}${grayColour} Descargar o actualizar archivos necesarios${endColour}"
@@ -197,3 +197,6 @@ elif [ ${chivato_difficulty} -eq 1 ] && [ ${chivato_os} -eq 1 ]; then
 else   
     helpPanel
 fi
+
+
+
