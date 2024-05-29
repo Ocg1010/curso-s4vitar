@@ -12,7 +12,7 @@ grayColour="\e[0;37m\033[1m"
 
 function ctrl_c () {
 echo -e "\n\n${redColour}[!] Saliendo...${endColour}\n"
-exit 1
+tput cnorm; exit 1
 }
 
 function helpPanel() {
@@ -23,7 +23,32 @@ function helpPanel() {
 }
 
 function martingala (){
-  echo -e "\n[+] Vamos a jugar con la técnica Martingala\n"
+  
+  echo -e "\n${yellowColour}[+]${endColour}${grayColour} Dinero actual:${endColour}${yellowColour} ${money}€${endColour}"
+  echo -ne "\n${yellowColour}[+]${endColour}${grayColour} ¿Cuánto dinero tienes pensado apostar? -> ${endColour}" && read initial_bet
+  echo -ne "\n${yellowColour}[+]${endcColour}${grayColour} ¿A que deseas apostar continuamente? (par/impar) -> ${endColour}" && read par_impar
+
+  echo -e "\n${yellowColour}[+]${endColour}${grayColour} Vamos a iniciar con una cantidad de${endColour}${yellowColour} ${initial_bet}€${endColour}${grayColour} a${endColour}${yellowColour} ${par_impar}${endColour}" 
+
+  tput civis  # Ocultar el cursor
+  while true; do
+    random_number="$(($RANDOM % 37))"
+    echo -e "\n${yellowColour}[+]${endColour}${grayColour} Ha salido el número${endColour}${blueColour} ${random_number}${endColour}"
+
+    if [ "$(($random_number % 2))" -eq 0 ]; then
+      if [ "$random_number" -eq 0  ]; then
+        echo -e "[+] Ha salido el 0, por lo tanto perdemos"
+      else
+        echo -e "[+] El número que ha salido es par"
+      fi
+    else
+       echo -e "[+] El número que ha salido es impar"
+    fi
+
+    sleep 0.4
+  done
+
+  tput cnorm # Recuperamos el cursor
 }
 
 # Ctrl+C 
