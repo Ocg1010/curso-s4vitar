@@ -22,10 +22,7 @@ function ctrl_c () {
 }
 function helpPanel () {
   echo -e "\n${yellowColour}[+]${endColour}${grayColour} Uso:${endColour}"
-  echo -e "\t${purpleColour}u)${endColour}${grayColour} Descargar o actualizar archivos necesarios${endColour}"
-  echo -e "\t${purpleColour}m)${endColour}${grayColour} Buscar por un nombre de maquina${endColour}"
-  echo -e "\t${purpleColour}h)${endColour}${grayColour} Motrar este panel de ayuda${endColour}\n"
-  echo -e "\t${purpleColour}i)${endColour}${grayColour} Buscar por dirección IP${endColour}\n"
+  echo -e "\t${purpleColour}u)${endColour}${grayColour} Descargar o actualizar archivos necesarios${endColour}"gidirección IP${endColour}\n"
 }
 
 function updateFiles (){
