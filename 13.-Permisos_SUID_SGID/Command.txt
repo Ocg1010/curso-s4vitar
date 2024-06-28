@@ -3,10 +3,10 @@
  chmod u+s /usr/bin/python3.12
 
  # BUSCAR ARCHIVOS CON EL PERMISO SUID
- find / -type f -perms -4000 2>/dev/nullimpo
+ find / -type f -perms -4000 2>/dev/null
 
 
- # ASIGNAR PRIVILEGIO SUID DE MANERA OCTAL Y NORMAL
+ # ASIGNAR PRIVILEGIO SGID DE MANERA OCTAL Y NORMAL
 chmod 2755
 chmod g+s /usr/bin/python3.12
 

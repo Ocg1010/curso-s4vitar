@@ -20,6 +20,7 @@ audio que representa nuestra tarjeta de sonido.
 psaux que representa el puerto PS/2
 lpx que representa nuestra impresora.
 fd0 que representa nuestra disquetera.
+
 Directorio /etc
 El directorio /etc es un directorio estático que contiene los archivos de configuración del sistema operativo. Este directorio también contiene archivos de configuración para controlar el funcionamiento de diversos programas.
 

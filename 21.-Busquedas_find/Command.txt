@@ -7,7 +7,7 @@ find / -name passwd 2>/dev/null | xargs ls -l
 # BUSCAR ARCHIVOS SUID
 find / -perm -4000 2>/dev/null
 
-# BUSCAR DIRECTORIOS CUYO GRUPO SEA WHIL
+# BUSCAR DIRECTORIOS CUYO GRUPO SEA OCANTORAN
 find / -group ocantoran -type d 2>/dev/null
 
 # BUSCAR ARCHIVOS CUYO USUARIO SEA ROOT Y QUE TENGA CAPACIDAD DE ESCRITURA
