@@ -1,7 +1,7 @@
 #!bin/bash
 # DESCOMPRESSOR
 
-function ctrl_c(){
+function ctrl_c (){
   echo -e "[+] Saliendo...\n"
  # En cuanto a los códigos de retorno, en Linux, un código de retorno de 0 generalmente indica éxito, mientras que cualquier otro valor indica algún tipo de error. 
 #rc = return_code 
