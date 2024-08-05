@@ -15,4 +15,4 @@ chmod g+s /usr/bin/python3.12
 
 # ASIGNAR PRIVILEGIOS STICKY BIT DE MANERA OCATAL Y NORMAL
 chmod 1755 carpeta/
-chmod u+t carpeta/
+chmod +t carpeta/
