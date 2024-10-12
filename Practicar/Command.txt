@@ -1,4 +1,4 @@
-# EL COMANDO awk 'NR==2' HACE QUE ME QUEDE CON LA SEGUNDA LINEA, PARECIDO A UN head -n 2, en el sentido de que inicia de abajo hacia arriba, solo que el head muestra las dos primeras lineas y el NR==2 solo la segunda
+# EL COMANDO awk 'NR==2' HACE QUE ME QUEDE CON LA SEGUNDA LINEA, PARECIDO A UN head -n 2,solo que el head muestra las dos primeras lineas y el NR==2 solo la segunda
 
 # AQUI ESTAMOS RECORTANDO CON awk EL SEGUNDO ARGUMENTO DE UNA LINEA, CON ESTO ME QUEDARIA MI IP Y SU MASCARA DE RED
 ip a | grep enp1s0 | awk 'NR==2' | awk '{print $2'}
