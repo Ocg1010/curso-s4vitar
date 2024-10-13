@@ -72,18 +72,18 @@ function martingala (){
       else
         # Toda esta definición es para cuando apostamos con números impares
         if [[ "$((random_number % 2))" -eq 1 ]]; then
-          echo -e "${yellowColour}[+]${endColour}${greenColour} El número que ha salido es impar ¡Ganas!${endColour}"
+          #echo -e "${yellowColour}[+]${endColour}${greenColour} El número que ha salido es impar ¡Ganas!${endColour}"
           reward=$((${initial_bet} * 2))
-          echo -e "${yellowColour}[+]${endColour}${grayColour} Ganas un total de${endColour}${yellowColour} ${reward}€${endColour}"
+          #echo -e "${yellowColour}[+]${endColour}${grayColour} Ganas un total de${endColour}${yellowColour} ${reward}€${endColour}"
           money=$((${money} + ${reward}))
-          echo -e "${yellowColour}[+]${endColour}${grayColour} Tienes${endColour}${yellowColour} ${money}€${endColour}"
+          #echo -e "${yellowColour}[+]${endColour}${grayColour} Tienes${endColour}${yellowColour} ${money}€${endColour}"
           initial_bet=$((${backup_bet}))
           jugadas_malas=""
         else
-          echo -e "${redColour}[+] El número que ha salido es par ¡Pierdes!${endColour}"
+          #echo -e "${redColour}[+] El número que ha salido es par ¡Pierdes!${endColour}"
           initial_bet=$((${initial_bet} * 2))
           jugadas_malas+="${random_number} "
-          echo -e "${yellowColour}[+]${endColour}${grayColour} Ahora mismo te quedas en${endColour}${yellowColour} ${money}€${endColour}"
+          #echo -e "${yellowColour}[+]${endColour}${grayColour} Ahora mismo te quedas en${endColour}${yellowColour} ${money}€${endColour}"
         fi
       fi 
     else
