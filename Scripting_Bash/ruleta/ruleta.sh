@@ -31,11 +31,11 @@ function martingala (){
   echo -ne "${yellowColour}[+]${endColour} ${grayColour}¿Cuánto dinero tienes pensado apostar? -> ${endColour}" && read initial_bet
   echo -ne "${yellowColour}[+]${endColour} ${grayColour}¿A qué desea apostar continuamente (par/impar)? -> ${endColour}" && read par_impar
 
-  echo -ne "\n${yellowColour}[+]${endColour} ${grayColour}Vamos a jugar con una cantidad inicial de${endColour}${yellowColour} ${initial_bet}€${endColour}${grayColour} a${endColour}${yellowColour} ${par_impar}${endColour}\n"
+  #echo -ne "\n${yellowColour}[+]${endColour} ${grayColour}Vamos a jugar con una cantidad inicial de${endColour}${yellowColour} ${initial_bet}€${endColour}${grayColour} a${endColour}${yellowColour} ${par_impar}${endColour}\n"
   
   backup_bet=${initial_bet}
   play_counter=1
-  jugadas_malas="["
+  jugadas_malas=""
 
   tput civis
   while true; do
@@ -44,7 +44,7 @@ function martingala (){
     random_number=$((RANDOM % 37))
     #echo -e "${yellowColour}[+]${endColour}${grayColour} Ha salido el número${endColour}${yellowColour} ${random_number}${endColour}"
 
-    if [[ ! ${money} -le 0 ]]; then
+    if [[ ! ${money} -lt 0 ]]; then
       # Toda esta definición es para cuando apostamos con números pares
       if [[ ${par_impar} == "par" ]]; then
         if [[ "$((random_number % 2))" -eq 0 ]]; then
@@ -89,9 +89,9 @@ function martingala (){
     else
       # Nos quedamos sin dinero
       echo -e "\n${redColour}[!] Te has quedado sin dinero cabrón${endColour}\n"
-      echo -e "${yellowColour}[+]${endColour}${grayColour} Han habido un total de${endColour}${yellowColour} ${play_counter}${endColour}${grayColour} jugadas${endColour}"
+      echo -e "${yellowColour}[+]${endColour}${grayColour} Han habido un total de${endColour}${yellowColour} $((${play_counter} -1))${endColour}${grayColour} jugadas${endColour}"
       echo -e "\n${yellowColour}[+]${endColour}${grayColour} A continuación se van a representar las jugadas malas consecutivas que han salido${endColour}"
-      echo -e "${blueColour} ${jugadas_malas}${endColour}"
+      echo -e "${blueColour}[ ${jugadas_malas}]${endColour}"
       tput cnorm && exit 0
     fi
     let play_counter+=1
