@@ -91,10 +91,60 @@ function martingala (){
       echo -e "\n${redColour}[!] Te has quedado sin dinero cabrón${endColour}\n"
       echo -e "${yellowColour}[+]${endColour}${grayColour} Han habido un total de${endColour}${yellowColour} $((${play_counter} -1))${endColour}${grayColour} jugadas${endColour}"
       echo -e "\n${yellowColour}[+]${endColour}${grayColour} A continuación se van a representar las jugadas malas consecutivas que han salido${endColour}"
-      echo -e "${blueColour}[ ${jugadas_malas}]${endColour}"
+      echo -e "\n${blueColour}[ ${jugadas_malas}]${endColour}\n"
       tput cnorm && exit 0
     fi
     let play_counter+=1
+  done
+  tput cnorm
+}
+
+function inverseLabrouchere (){
+  echo -e "\n${yellowColour}[+]${endColour}${grayColour} Dinero actual: ${endColour}${yellowColour}${money}€${endColour}"
+  echo -ne "${yellowColour}[+]${endColour} ${grayColour}¿A qué desea apostar continuamente (par/impar)? -> ${endColour}" && read par_impar
+
+  declare -a my_sequence=(1 2 3 4)
+
+  echo -e "\n${yellowColour}[+]${endColour}${grayColour} Comenzamos con la secuencia${endColour} ${greenColour}[${my_sequence[@]}]${endColour}"
+  
+  bet=$((${my_sequence[0]} + ${my_sequence[-1]}))
+
+
+  tput civis
+  while true; do
+    random_number=$(($RANDOM % 37)) 
+    money=$((${money} - ${bet}))
+    echo -e "${yellowColour}[+]${endColour} ${grayColour}Invertimos${endColour} ${yellowColour}${bet}€${endColour}"
+    echo -e "${yellowColour}[+]${endColour} ${grayColour}Tenemos${endColour} ${yellowColour}${money}€${endColour}"
+    echo -e "\n${yellowColour}[+]${endColour} ${grayColour}Ha salido el número${endColour} ${blueColour}${random_number}${endColour}"
+
+    if [[ "${par_impar}" == "par" ]]; then
+      if [[ "$((${random_number} % 2))" -eq 0 ]] && [[ "${random_number}" -ne 0 ]]; then
+        echo -e "${yellowColour}[+]${endColour} ${grayColour}El número es par, ¡Ganas!${endColour}"
+	reward=$((${bet} * 2))
+	let money+=${reward}
+	echo -e "${yellowColour}[+]${endColour}${grayColour} Tienes${endColour} ${yellowColour}${money}€${endColour}"
+
+	my_sequence+=(${bet})
+  	my_sequence=(${my_sequence[@]})
+
+	echo -e "${yellowColour}[+]${endColour} ${grayColour}Nuestra nueva secuencia es${endColour} ${greenColour}[${my_sequence[@]}]${endColour}"
+	if [[ "${#my_sequence[@]}" -ne 1 ]]; then
+    	  bet=$((${my_sequence[0]} + ${my_sequence[-1]}))
+  	elif [[ "${#my_sequence[@]}" -eq 1 ]]; then
+	  bet=${my_sequence[0]}
+	fi
+      elif [[ "${random_number}" -eq 0 ]]; then
+	echo -e "${redColour}[!] Ha salido el cero, ¡Pierdes!${endColour}"
+	
+
+      else
+
+        echo -e "${redColour}[!] El número es impar, ¡Pierdes!${endColour}"
+      fi
+    fi
+
+    sleep 10
   done
   tput cnorm
 }
@@ -110,6 +160,8 @@ done
 if [[ ${money}  ]] && [[ ${technique} ]]; then
   if [[ "${technique}" == "martingala" ]]; then
     martingala
+  elif [[ "${technique} == inverseLabrouchere" ]]; then
+    inverseLabrouchere
   else
     echo -e "\n${redColour}[!] La técnica introducida no existe${endColour}"
     helpPanel
