@@ -21,7 +21,7 @@ trap ctrl_c INT
 function helpPanel(){
   echo -e "\n${yellowColour}[+]${endColour} ${grayColour}Uso${endColour} ${purpleColour}$0${endColour} \n"
   echo -e "\t${blueColour}-m)${endColour} ${grayColour}Dinero con el que se desea jugar${endColour}"
-  echo -e "\t${blueColour}-t)${endColour} ${grayColour}Técnica a utilizar${endColour} ${purpleColour}(${endColour}${yellowColour}martingala${endColour}${blueColour}/${endColour}${yellowColour}inverseLabrouchere${endColour}${purpleColour})${endColour}\n"
+  echo -e "\t${blueColour}-t)${endColour} ${grayColour}Técnica a utilizar${endColour} ${purpleColour}(${endColour}${yellowColour}martingala${endColour}${blueColour}/${endColour}${yellowColour}inverseLabouchere${endColour}${purpleColour})${endColour}\n"
   exit 1
 }
 
@@ -99,7 +99,7 @@ function martingala (){
   tput cnorm
 }
 
-function inverseLabrouchere (){
+function inverseLabouchere (){
   echo -e "\n${yellowColour}[+]${endColour}${grayColour} Dinero actual: ${endColour}${yellowColour}${money}€${endColour}"
   echo -ne "${yellowColour}[+]${endColour} ${grayColour}¿A qué desea apostar continuamente (par/impar)? -> ${endColour}" && read par_impar
 
@@ -116,35 +116,51 @@ function inverseLabrouchere (){
     money=$((${money} - ${bet}))
     echo -e "${yellowColour}[+]${endColour} ${grayColour}Invertimos${endColour} ${yellowColour}${bet}€${endColour}"
     echo -e "${yellowColour}[+]${endColour} ${grayColour}Tenemos${endColour} ${yellowColour}${money}€${endColour}"
+    sleep 3
     echo -e "\n${yellowColour}[+]${endColour} ${grayColour}Ha salido el número${endColour} ${blueColour}${random_number}${endColour}"
 
     if [[ "${par_impar}" == "par" ]]; then
       if [[ "$((${random_number} % 2))" -eq 0 ]] && [[ "${random_number}" -ne 0 ]]; then
-        echo -e "${yellowColour}[+]${endColour} ${grayColour}El número es par, ¡Ganas!${endColour}"
-	reward=$((${bet} * 2))
-	let money+=${reward}
-	echo -e "${yellowColour}[+]${endColour}${grayColour} Tienes${endColour} ${yellowColour}${money}€${endColour}"
+        echo -e "${yellowColour}[+]${endColour} ${greenColour}El número es par, ¡Ganas!${endColour}"
+	      reward=$((${bet} * 2))
+	      let money+=${reward}
+      	echo -e "${yellowColour}[+]${endColour}${grayColour} Tienes${endColour} ${yellowColour}${money}€${endColour}"
 
-	my_sequence+=(${bet})
-  	my_sequence=(${my_sequence[@]})
+	      my_sequence+=(${bet})
+        my_sequence=(${my_sequence[@]})
+	      echo -e "${yellowColour}[+]${endColour} ${grayColour}Nuestra nueva secuencia es${endColour} ${greenColour}[${my_sequence[@]}]${endColour}"
 
-	echo -e "${yellowColour}[+]${endColour} ${grayColour}Nuestra nueva secuencia es${endColour} ${greenColour}[${my_sequence[@]}]${endColour}"
-	if [[ "${#my_sequence[@]}" -ne 1 ]]; then
-    	  bet=$((${my_sequence[0]} + ${my_sequence[-1]}))
-  	elif [[ "${#my_sequence[@]}" -eq 1 ]]; then
-	  bet=${my_sequence[0]}
-	fi
+	      if [[ "${#my_sequence[@]}" -ne 1 ]] && [[ ${#my_sequence[@]} -ne 0 ]]; then
+          bet=$((${my_sequence[0]} + ${my_sequence[-1]}))
+        elif [[ "${#my_sequence[@]}" -eq 1 ]]; then
+	        bet=${my_sequence[0]}
+	    else
+          echo -e "${redColour}[!] Hemos perdido nuestra secuencia${endColour}"
+          echo -e "${yellowColour}[+]${endColour} ${grayColour}Restablecemos la secuencia a ${endColour}${greenColour}[${my_sequence[@]}]${endColour}"
+	    fi
+ 
       elif [[ "${random_number}" -eq 0 ]]; then
-	echo -e "${redColour}[!] Ha salido el cero, ¡Pierdes!${endColour}"
-	
-
+	      echo -e "${redColour}[!] Ha salido el cero, ¡Pierdes!${endColour}"
       else
-
         echo -e "${redColour}[!] El número es impar, ¡Pierdes!${endColour}"
+        
+        unset my_sequence[0]
+        unset my_sequence[-1] 2> /dev/null
+        my_sequence=(${my_sequence[@]})
+
+        echo -e "${yellowColour}[+]${endColour} ${grayColour}La secuencia se nos queda de la siguiente forma:${endColour} ${greenColour}[${my_sequence[@]}]${endColour}" 
+	      if [[ "${#my_sequence[@]}" -ne 1 ]] && [[ ${#my_sequence[@]} -ne 0 ]]; then
+          bet=$((${my_sequence[0]} + ${my_sequence[-1]}))
+        elif [[ "${#my_sequence[@]}" -eq 1 ]]; then
+	        bet=${my_sequence[0]}
+        else
+          echo -e "${redColour}[!] Hemos perdido nuestra secuencia${endColour}"
+          my_sequence=(1 2 3 4)
+          echo -e "${yellowColour}[+]${endColour} ${grayColour}Restablecemos la secuencia a ${endColour}${greenColour}[${my_sequence[@]}]${endColour}"
+	      fi
       fi
     fi
 
-    sleep 10
   done
   tput cnorm
 }
@@ -158,10 +174,10 @@ while getopts "m:t:h" arg; do
 done
 
 if [[ ${money}  ]] && [[ ${technique} ]]; then
-  if [[ "${technique}" == "martingala" ]]; then
+  if [[ ${technique} == "martingala" ]]; then
     martingala
-  elif [[ "${technique} == inverseLabrouchere" ]]; then
-    inverseLabrouchere
+  elif [[ ${technique} == "inverseLabouchere" ]]; then
+    inverseLabouchere
   else
     echo -e "\n${redColour}[!] La técnica introducida no existe${endColour}"
     helpPanel
